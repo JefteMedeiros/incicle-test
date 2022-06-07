@@ -30,8 +30,8 @@ const Nav: React.FC<Props> = ({ onFilterChange, filters }) => {
 
   return (
     <NavContainer sx={{ flexDirection: { sm: 'row' } }}>
-      <NavTitle variant="h4">Endomarketing</NavTitle>
-      <NavButtons>
+      <NavTitle sx={{textAlign:{sm:"left"}}} variant="h4">Endomarketing</NavTitle>
+      <NavButtons sx={{flexDirection:{sm:"row"}}}>
         <FormControl sx={{ minWidth: '287px' }}>
           <InputLabel id="multiple-checkbox-label">Tipo</InputLabel>
           <Select
