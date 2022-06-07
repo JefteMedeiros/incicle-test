@@ -1,45 +1,36 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+import Layout from './components/layout';
+import Notification from './components/Notification';
+import Events from './components/Events';
+import Nav from './components/Nav';
+import Frame from './components/Frame';
+
+import { Aside, Section, Wrapper } from './styles/Global';
+
+import './index.css';
+
+const src: React.FC = () => {
+  const [filters, setFilters] = useState<string[]>([]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
-}
+    <Layout>
+      <Wrapper sx={{ flexDirection: { lg: 'row' }, padding: { lg: '25px 75px' } }}>
+        <Section>
+          <Nav filters={filters} onFilterChange={filters => setFilters(typeof filters === 'string' ? filters.split(',').filter(Boolean) : filters)} />
+          <Events filters={filters} />
+        </Section>
+        <Aside
+          sx={{
+            flexDirection: { sm: 'row', xs: 'column', lg: 'column' },
+          }}
+        >
+          <Notification />
+          <Frame />
+        </Aside>
+      </Wrapper>
+    </Layout>
+  );
+};
 
-export default App
+export default src;
